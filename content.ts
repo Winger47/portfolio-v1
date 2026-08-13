@@ -70,6 +70,16 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: "FORGE",
+    blurb: "Agentic coding CLI on a self-hosted LLM gateway",
+    description:
+      "An agentic coding CLI that loops think → act → observe until a goal is done, with every model call routed through a self-built OpenAI-compatible LLM gateway. The gateway adds two-tier caching (exact Redis hash in front, scoped semantic cache behind), a Redis-Lua token-bucket rate limiter, model failover including mid-stream, and a non-blocking async handler that offloads blocking I/O to a threadpool. The agent brings real token streaming with tool-call reassembly, an MCP client for external tool servers, a permission/approval gate, context compaction on a token budget, and session persistence.",
+    tags: ["Python", "LLM Gateway", "Redis", "MCP", "Streaming", "Async"],
+    github: "https://github.com/Winger47/forge",
+    featured: true,
+    year: "2026",
+  },
+  {
     name: "CodeQuery AI",
     blurb: "Production RAG over code",
     description:
