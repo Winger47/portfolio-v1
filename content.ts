@@ -9,7 +9,7 @@ export const profile = {
   role: "Backend & GenAI Engineer",
   roleMono: "BACKEND & GENAI ENGINEER",
   location: "Delhi NCR",
-  status: "Open to SDE-2 roles",
+  status: "Open to SDE-1 / SDE-2 roles",
   codeforcesRank: "Expert",
   tagline:
     "I build production backend systems and applied GenAI — distributed Python services and the infrastructure that makes them reliable under load.",

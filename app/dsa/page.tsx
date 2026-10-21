@@ -4,6 +4,7 @@ import PageShell from "@/components/PageShell";
 import Dsa from "@/components/Dsa";
 import { pages } from "@/content";
 import { getCodeforces } from "@/data/codeforces";
+import { getLeetcode } from "@/data/leetcode";
 
 export const metadata: Metadata = {
   title: "DSA & Algorithms — Shikhar Pandav",
@@ -11,13 +12,13 @@ export const metadata: Metadata = {
 };
 
 export default async function DsaPage() {
-  const cf = await getCodeforces();
+  const [cf, lc] = await Promise.all([getCodeforces(), getLeetcode()]);
   return (
     <>
       <Navbar />
       <main>
         <PageShell page="dsa">
-          <Dsa cf={cf} />
+          <Dsa cf={cf} lc={lc} />
         </PageShell>
       </main>
     </>
