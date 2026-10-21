@@ -19,13 +19,13 @@ export const profile = {
   coverUrl: null as string | null, // TODO: add /public/images/cover.jpg → set "/images/cover.jpg"
   avatarUrl: null as string | null, // TODO: add /public/images/avatar.jpg → set "/images/avatar.jpg"
 
-  resumeUrl: "/Shikhar_Pandav_Resume.pdf",
+  resumeUrl: "/Shikhar_Pandav_Resume.pdf?v=2026-10-21",
   links: {
     github: "https://github.com/Winger47",
     linkedin: "https://www.linkedin.com/in/shikhar-pandav-32a90624b/",
     codeforces: "https://codeforces.com/profile/rs27_cris",
     leetcode: "https://leetcode.com/u/rs_cris/",
-    email: "shikharrs27work@gmail.com",
+    email: "shikhar152725work@gmail.com",
   },
 };
 
