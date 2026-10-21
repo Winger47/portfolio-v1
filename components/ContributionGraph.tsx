@@ -4,8 +4,14 @@ import { useEffect, useState } from "react";
 
 type Day = { date: string; count: number; level: number };
 
-// amber intensity ramp for levels 0–4, matching the site accent
-const LEVELS = ["#1A1E27", "#5c4a25", "#9c7220", "#d39b34", "#FFB454"];
+// accent-tinted intensity ramp for levels 0–4; resolves to the themed tokens
+const LEVELS = [
+  "rgb(var(--border))",
+  "rgb(var(--accent) / 0.55)",
+  "rgb(var(--accent) / 0.85)",
+  "rgb(var(--accent-ink) / 0.55)",
+  "rgb(var(--accent-ink) / 0.9)",
+];
 
 export default function ContributionGraph({ username }: { username: string }) {
   const [days, setDays] = useState<Day[] | null>(null);
@@ -36,7 +42,7 @@ export default function ContributionGraph({ username }: { username: string }) {
         href={`https://github.com/${username}`}
         target="_blank"
         rel="noreferrer"
-        className="font-mono text-sm text-muted hover:text-ink"
+        className="font-mono text-sm text-muted hover:text-fg"
       >
         View activity on github.com/{username} →
       </a>

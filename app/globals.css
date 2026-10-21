@@ -108,6 +108,24 @@
   );
 }
 
+/* command palette (cmdk) group headings */
+[cmdk-group-heading] {
+  padding: 0.5rem 0.75rem 0.25rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--muted));
+}
+
+/* engineering-details disclosure chevron */
+details[data-card] > summary .chev {
+  transition: transform 0.2s ease;
+}
+details[data-card][open] > summary .chev {
+  transform: rotate(180deg);
+}
+
 /* fade-up on scroll */
 .reveal {
   opacity: 0;
@@ -146,5 +164,8 @@
   }
   .dot-pulse {
     animation: none;
+  }
+  details[data-card] > summary .chev {
+    transition: none;
   }
 }
