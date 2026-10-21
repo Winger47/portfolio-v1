@@ -2,72 +2,149 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ──────────────────────────────────────────────────────────────────────────
+   Design tokens — single source of truth for the palette. Colors are stored as
+   space-separated RGB triplets so Tailwind can apply `/opacity` modifiers
+   (see tailwind.config.ts). Light is the default; dark follows the OS until the
+   viewer explicitly picks a theme via [data-theme] (toggle + ⌘K, Step 7).
+   ────────────────────────────────────────────────────────────────────────── */
+:root {
+  --bg: 252 252 251; /* #FCFCFB */
+  --fg: 24 24 27; /* #18181B */
+  --muted: 113 113 122; /* #71717A */
+  --border: 228 228 231; /* #E4E4E7 */
+  --card: 255 255 255; /* #FFFFFF */
+  --accent: 249 214 155; /* #F9D69B */
+  --accent-ink: 138 90 0; /* #8A5A00 — readable warm on light */
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: 12 12 13; /* #0C0C0D */
+  --fg: 237 237 237; /* #EDEDED */
+  --muted: 161 161 170; /* #A1A1AA */
+  --border: 39 39 42; /* #27272A */
+  --card: 20 20 22; /* #141416 */
+  --accent: 249 214 155; /* #F9D69B */
+  --accent-ink: 249 214 155; /* pale warm is readable on dark */
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: 12 12 13;
+    --fg: 237 237 237;
+    --muted: 161 161 170;
+    --border: 39 39 42;
+    --card: 20 20 22;
+    --accent: 249 214 155;
+    --accent-ink: 249 214 155;
+    color-scheme: dark;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-bg text-ink font-sans antialiased;
-    background-image:
-      radial-gradient(60% 50% at 80% 0%, rgba(255, 180, 84, 0.06), transparent 60%),
-      radial-gradient(50% 40% at 0% 30%, rgba(94, 200, 168, 0.04), transparent 60%);
-    background-attachment: fixed;
+    @apply bg-bg text-fg font-sans antialiased;
+    font-size: 14px;
+    line-height: 1.7;
+    /* very faint dotted grid (~3.5% opacity) */
+    background-image: radial-gradient(
+      circle at center,
+      rgb(var(--fg) / 0.035) 1px,
+      transparent 1.4px
+    );
+    background-size: 22px 22px;
   }
   ::selection {
-    @apply bg-amber/30 text-ink;
+    background: rgb(var(--accent) / 0.5);
+    color: rgb(var(--fg));
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent-ink));
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
 @layer components {
-  /* monospace "log line" eyebrow used to label sections */
-  .eyebrow {
-    @apply font-mono text-xs uppercase tracking-[0.2em] text-amber;
+  /* small mono meta/label text used everywhere */
+  .meta {
+    @apply font-mono uppercase text-muted;
+    font-size: 11px;
+    letter-spacing: 0.06em;
   }
   .section {
-    @apply mx-auto max-w-content px-6 py-24 md:py-28;
+    @apply mx-auto w-full max-w-[720px] px-4 py-12;
+  }
+  .sep {
+    @apply border-t border-dashed border-line;
   }
   .card {
-    @apply rounded-lg border border-line bg-surface transition-colors duration-300;
-  }
-  .card:hover {
-    @apply border-amber/40;
+    @apply rounded-md border border-line bg-card transition-all duration-200;
   }
   .tag {
-    @apply font-mono text-xs text-muted border border-line rounded px-2 py-1;
+    @apply inline-block font-mono rounded-[4px] border border-line px-1.5 py-0.5 text-muted;
+    font-size: 11px;
   }
-  .link-amber {
-    @apply text-amber transition-opacity hover:opacity-70;
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 font-mono;
+    font-size: 11px;
+    letter-spacing: 0.04em;
   }
 }
 
-/* scroll reveal */
+/* scanline texture laid over project images */
+.scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgb(0 0 0 / 0.07) 0px,
+    rgb(0 0 0 / 0.07) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* fade-up on scroll */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(12px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
-/* blinking terminal cursor */
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+/* pulsing "live" status dot */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.82);
+  }
 }
-.cursor {
-  display: inline-block;
-  width: 0.55ch;
-  height: 1.1em;
-  background: #FFB454;
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  animation: blink 1.1s step-end infinite;
+.dot-pulse {
+  animation: pulse-dot 1.8s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  .cursor { animation: none; }
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .dot-pulse {
+    animation: none;
+  }
 }

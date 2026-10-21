@@ -1,23 +1,29 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const display = Space_Grotesk({
+// Headings: elegant display serif (single 400 weight is all this family ships).
+const display = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["500", "700"],
+  weight: "400",
+  style: ["normal", "italic"],
   variable: "--font-display",
+  display: "swap",
 });
 
-const sans = IBM_Plex_Sans({
+// Body copy.
+const sans = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   variable: "--font-sans",
+  display: "swap",
 });
 
+// Meta text, labels, badges, dates.
 const mono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -38,7 +44,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${display.variable} ${sans.variable} ${mono.variable}`}
+    >
+      <head>
+        {/* Set the theme before paint to avoid a flash of the wrong palette. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );
