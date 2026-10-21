@@ -2,11 +2,22 @@
 
 import { Command } from "cmdk";
 import { useEffect, useState } from "react";
-import { profile, sections } from "@/content";
+import { useRouter } from "next/navigation";
+import { profile, pages, type PageKey } from "@/content";
 import { toggleTheme } from "@/lib/theme";
+
+const NAV: { key: "home" | PageKey; label: string; href: string }[] = [
+  { key: "home", label: "Home", href: "/" },
+  { key: "projects", label: pages.projects.title, href: pages.projects.href },
+  { key: "experience", label: pages.experience.title, href: pages.experience.href },
+  { key: "skills", label: pages.skills.title, href: pages.skills.href },
+  { key: "dsa", label: pages.dsa.title, href: pages.dsa.href },
+  { key: "activity", label: pages.activity.title, href: pages.activity.href },
+];
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -28,8 +39,7 @@ export default function CommandPalette() {
     setOpen(false);
     fn();
   };
-  const go = (id: string) =>
-    run(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }));
+  const go = (href: string) => run(() => router.push(href));
   const openUrl = (url: string) =>
     run(() => window.open(url, "_blank", "noopener,noreferrer"));
   const downloadResume = () =>
@@ -68,10 +78,10 @@ export default function CommandPalette() {
           No results found.
         </Command.Empty>
 
-        <Command.Group heading="Navigate">
-          {sections.map((s) => (
-            <Command.Item key={s.id} value={`go ${s.label}`} onSelect={() => go(s.id)} className={item}>
-              <span>{s.label.replace(/^\d+\s*—\s*/, "")}</span>
+        <Command.Group heading="Go to">
+          {NAV.map((n) => (
+            <Command.Item key={n.key} value={`go ${n.label}`} onSelect={() => go(n.href)} className={item}>
+              <span>{n.label}</span>
               <span className={kbd}>↵</span>
             </Command.Item>
           ))}

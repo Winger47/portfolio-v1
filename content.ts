@@ -155,7 +155,7 @@ export const experience = {
     },
     {
       client: "Banking engagement — read path & service boundaries",
-      stack: ["Python", "Redis", "gRPC/Protobuf"],
+      stack: [".NET / .NET Core", "Redis", "gRPC/Protobuf"],
       points: [
         "Owned the read path of a high-traffic transactional API, cutting database load with a Redis read-through cache — tenant-scoped keys and per-endpoint TTLs bounding staleness without write-path invalidation.",
         "Hardened service boundaries by migrating inter-service REST/JSON to gRPC/Protobuf, moving contract breakage from runtime to build time via generated stubs and CI schema checks.",
@@ -186,11 +186,51 @@ export const competitive = [
   },
 ];
 
-// Section labels (mono, numbered) used by the layout shell.
-export const sections = [
-  { id: "about", label: "01 — ABOUT" },
-  { id: "projects", label: "02 — PROJECTS" },
-  { id: "experience", label: "03 — EXPERIENCE" },
-  { id: "stack", label: "04 — STACK" },
-  { id: "activity", label: "05 — ACTIVITY" },
+// ── Pages / navigation (single source for tiles, navbar, breadcrumbs, ⌘K) ────
+export type PageKey = "projects" | "dsa" | "experience" | "skills" | "activity";
+
+export const pages: Record<
+  PageKey,
+  { href: string; mono: string; title: string; desc: string }
+> = {
+  projects: {
+    href: "/projects",
+    mono: "02 — PROJECTS",
+    title: "Projects",
+    desc: "Production backend and applied-GenAI systems, with the engineering details behind each.",
+  },
+  dsa: {
+    href: "/dsa",
+    mono: "03 — DSA",
+    title: "DSA & Algorithms",
+    desc: "Competitive programming — Codeforces Expert, with live rating and history.",
+  },
+  experience: {
+    href: "/experience",
+    mono: "04 — EXPERIENCE",
+    title: "Experience",
+    desc: "~2 years at Infosys across banking and e-commerce engagements.",
+  },
+  skills: {
+    href: "/skills",
+    mono: "05 — SKILLS",
+    title: "Skills",
+    desc: "The full stack I work with, grouped the way my résumé groups it.",
+  },
+  activity: {
+    href: "/activity",
+    mono: "06 — ACTIVITY",
+    title: "Activity",
+    desc: "GitHub contributions and competitive-programming profiles.",
+  },
+};
+
+// Order of the primary links shown in the navbar.
+export const navOrder: PageKey[] = ["projects", "experience", "skills", "dsa"];
+
+// DSA topics — TODO placeholders; fill these in yourself.
+export const dsaTopics: string[] = [
+  "TODO: strong topic (e.g. Graphs)",
+  "TODO: strong topic (e.g. DP)",
+  "TODO: strong topic (e.g. Binary Search)",
 ];

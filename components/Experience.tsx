@@ -1,11 +1,8 @@
 import { experience, expStats } from "@/content";
-import SectionHeader from "./SectionHeader";
 
 export default function Experience() {
   return (
     <>
-      <SectionHeader label="03 — EXPERIENCE" title="Experience" />
-
       {/* vertical timeline */}
       <div className="relative border-l border-line pl-6">
         <span

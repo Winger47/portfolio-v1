@@ -1,12 +1,9 @@
 import { competitive } from "@/content";
-import SectionHeader from "./SectionHeader";
 import ContributionGraph from "./ContributionGraph";
 
 export default function Activity() {
   return (
     <>
-      <SectionHeader label="05 — ACTIVITY" title="GitHub activity" />
-
       <div className="card overflow-x-auto p-4">
         <div className="meta mb-3">@Winger47</div>
         <div className="min-w-[640px]">

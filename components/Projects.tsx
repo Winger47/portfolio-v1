@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { projects, projectCategories } from "@/content";
 import ProjectCard from "./ProjectCard";
-import SectionHeader from "./SectionHeader";
 
 export default function Projects() {
   const [active, setActive] = useState<string>("All");
@@ -12,8 +11,6 @@ export default function Projects() {
 
   return (
     <>
-      <SectionHeader label="02 — PROJECTS" title="Selected projects" />
-
       <div role="tablist" aria-label="Filter projects" className="mb-6 flex flex-wrap gap-5">
         {projectCategories.map((c) => {
           const selected = active === c;

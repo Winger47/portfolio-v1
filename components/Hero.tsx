@@ -1,5 +1,4 @@
 import Cover from "./Cover";
-import SkillsCard from "./SkillsCard";
 import { profile, about } from "@/content";
 import { GithubIcon, LinkedinIcon, MailIcon, FileIcon } from "./icons";
 
@@ -76,13 +75,8 @@ export default function Hero() {
         </ul>
       </div>
 
-      {/* Skills card */}
-      <div className="mt-5">
-        <SkillsCard />
-      </div>
-
       {/* Contact row */}
-      <div className="mt-5 flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-wrap gap-2">
         <ContactButton href={profile.links.github} label="GitHub" external>
           <GithubIcon />
         </ContactButton>
