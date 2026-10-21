@@ -19,7 +19,7 @@ export const profile = {
   coverUrl: null as string | null, // TODO: add /public/images/cover.jpg → set "/images/cover.jpg"
   avatarUrl: null as string | null, // TODO: add /public/images/avatar.jpg → set "/images/avatar.jpg"
 
-  resumeUrl: "/Shikhar_Pandav_Resume.pdf?v=2026-10-13b",
+  resumeUrl: "/Shikhar_Pandav_Resume.pdf?v=2026-10-21c",
   calUrl: null as string | null, // TODO: set a Cal.com URL to show the "Book a call" card
   links: {
     github: "https://github.com/Winger47",
