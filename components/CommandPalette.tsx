@@ -32,8 +32,20 @@ export default function CommandPalette() {
     run(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }));
   const openUrl = (url: string) =>
     run(() => window.open(url, "_blank", "noopener,noreferrer"));
+  const downloadResume = () =>
+    run(() => {
+      const a = document.createElement("a");
+      a.href = profile.resumeUrl;
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  const viewSkills = () => run(() => window.dispatchEvent(new Event("open-skills")));
   const copyEmail = () =>
-    run(() => navigator.clipboard?.writeText(profile.links.email).catch(() => {}));
+    run(() => {
+      if (navigator.clipboard) navigator.clipboard.writeText(profile.links.email).catch(() => {});
+    });
 
   const item =
     "flex cursor-pointer items-center justify-between gap-3 rounded px-3 py-2 text-sm text-fg data-[selected=true]:bg-accent/30";
@@ -75,12 +87,18 @@ export default function CommandPalette() {
           <Command.Item value="codeforces" onSelect={() => openUrl(profile.links.codeforces)} className={item}>
             Codeforces <span className={kbd}>↗</span>
           </Command.Item>
-          <Command.Item value="resume" onSelect={() => openUrl(profile.resumeUrl)} className={item}>
-            Résumé <span className={kbd}>↗</span>
+          <Command.Item value="open resume" onSelect={() => openUrl(profile.resumeUrl)} className={item}>
+            Open résumé <span className={kbd}>↗</span>
+          </Command.Item>
+          <Command.Item value="download resume" onSelect={downloadResume} className={item}>
+            Download résumé <span className={kbd}>↓</span>
           </Command.Item>
         </Command.Group>
 
         <Command.Group heading="Actions">
+          <Command.Item value="view all skills" onSelect={viewSkills} className={item}>
+            View all skills <span className={kbd}>↵</span>
+          </Command.Item>
           <Command.Item value="copy email" onSelect={copyEmail} className={item}>
             Copy email <span className={kbd}>{profile.links.email}</span>
           </Command.Item>

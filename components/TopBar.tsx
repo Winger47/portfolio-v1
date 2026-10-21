@@ -4,8 +4,9 @@ import dynamic from "next/dynamic";
 import ThemeToggle from "./ThemeToggle";
 import { profile } from "@/content";
 
-// Lazy-load the command palette (keeps cmdk out of the initial bundle).
+// Lazy-load overlay UIs (keeps cmdk + dialog out of the initial bundle).
 const CommandPalette = dynamic(() => import("./CommandPalette"), { ssr: false });
+const SkillsDialog = dynamic(() => import("./SkillsDialog"), { ssr: false });
 
 export default function TopBar() {
   return (
@@ -33,6 +34,7 @@ export default function TopBar() {
         </div>
       </header>
       <CommandPalette />
+      <SkillsDialog />
     </>
   );
 }

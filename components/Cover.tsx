@@ -41,7 +41,7 @@ export default function Cover() {
         )}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 to-transparent"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-bg to-transparent"
         />
       </div>
       <div className="-mt-12 ml-4">

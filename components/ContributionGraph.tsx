@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 
 type Day = { date: string; count: number; level: number };
 
-// accent-tinted intensity ramp for levels 0–4; resolves to the themed tokens
+// theme-aware amber ramp for levels 0–4 (separate light/dark scales in globals.css)
 const LEVELS = [
-  "rgb(var(--border))",
-  "rgb(var(--accent) / 0.55)",
-  "rgb(var(--accent) / 0.85)",
-  "rgb(var(--accent-ink) / 0.55)",
-  "rgb(var(--accent-ink) / 0.9)",
+  "var(--gh-0)",
+  "var(--gh-1)",
+  "var(--gh-2)",
+  "var(--gh-3)",
+  "var(--gh-4)",
 ];
 
 export default function ContributionGraph({ username }: { username: string }) {

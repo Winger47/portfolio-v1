@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────────────────────────────────
-// EDIT YOUR CONTENT HERE. This is the only file you need to touch for copy.
+// EDIT YOUR CONTENT HERE. Skills live in data/skills.ts (single source).
 // Anything marked TODO needs your real value before you ship.
 // ──────────────────────────────────────────────────────────────────────────
 
@@ -8,18 +8,18 @@ export const profile = {
   initials: "SP",
   role: "Backend & GenAI Engineer",
   roleMono: "BACKEND & GENAI ENGINEER",
-  location: "Meerut / Agra, India",
+  location: "Delhi NCR",
   status: "Open to SDE-2 roles",
   codeforcesRank: "Expert",
   tagline:
-    "I build production backend systems and applied GenAI — RAG pipelines, multi-agent LLM systems, and the distributed infrastructure that makes them reliable instead of demos.",
+    "I build production backend systems and applied GenAI — distributed Python services and the infrastructure that makes them reliable under load.",
 
   // Drop real raster images into /public/images/ and set these paths to switch
   // from the generated fallbacks to next/image. Leave null to keep fallbacks.
   coverUrl: null as string | null, // TODO: add /public/images/cover.jpg → set "/images/cover.jpg"
   avatarUrl: null as string | null, // TODO: add /public/images/avatar.jpg → set "/images/avatar.jpg"
 
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/Shikhar_Pandav_Resume.pdf",
   links: {
     github: "https://github.com/Winger47",
     linkedin: "https://www.linkedin.com/in/shikhar-pandav-32a90624b/",
@@ -31,9 +31,9 @@ export const profile = {
 
 // Three short bullet paragraphs for the hero About block.
 export const about: string[] = [
-  "Backend engineer at the intersection of distributed systems and applied GenAI. I build the production infrastructure — async pipelines, vector stores, observability — that makes AI features reliable instead of demos.",
-  "My foundation is production backend: services for a banking client at Infosys on .NET, and a Python backend for an e-commerce client with a gRPC migration and event-driven flows on RabbitMQ + Redis.",
-  "My projects are where the AI work lives: semantic code search with cross-encoder re-ranking, a multi-agent interview platform, and an agentic coding CLI on a self-built LLM gateway.",
+  "Backend engineer with ~2 years on distributed Python services — FastAPI, gRPC, RabbitMQ, Redis, GCP — across banking and e-commerce engagements at Infosys.",
+  "Depth in the unglamorous parts: concurrency control, idempotent pipelines, read-through caching, and the observability to prove they hold under load.",
+  "My projects push into applied GenAI — a self-hosted LLM gateway with semantic caching and an agentic CLI, plus RAG over code and a multi-agent interview platform.",
 ];
 
 // ── Projects ────────────────────────────────────────────────────────────────
@@ -45,7 +45,7 @@ export type Project = {
   blurb: string; // ~2 lines, shown on the card
   category: ProjectCategory;
   status: ProjectStatus;
-  latency?: string; // optional motif for live projects, e.g. "p99 42ms" — no invented numbers
+  latency?: string; // optional motif for live projects, e.g. "42ms" — no invented numbers
   year: string;
   tags: string[];
   github?: string;
@@ -69,11 +69,11 @@ export const projects: Project[] = [
   {
     name: "FORGE",
     blurb:
-      "An agentic coding CLI that loops think → act → observe, with every model call routed through a self-built OpenAI-compatible gateway (two-tier cache, token-bucket limiter, failover).",
+      "A self-hosted, OpenAI-compatible LLM gateway + agentic CLI: atomic Redis-Lua token-bucket limiting, exact + semantic caching, and per-model circuit breaking with backoff failover.",
     category: "Backend",
     status: "wip", // TODO: set "live" + add demo URL if deployed
     year: "2026",
-    tags: ["Python", "LLM Gateway", "Redis", "MCP", "Streaming", "Async"],
+    tags: ["Python", "FastAPI", "Redis", "PostgreSQL", "LLM Gateway", "MCP"],
     github: "https://github.com/Winger47/forge",
     imageUrl: null, // TODO: add /public/images/projects/forge.jpg
     details: { ...TODO_DETAILS },
@@ -105,12 +105,11 @@ export const projects: Project[] = [
   {
     name: "MyTube",
     blurb:
-      "A video platform with upload, processing, and streaming, plus a creator-facing experience.",
+      "A full-stack video platform — Mux adaptive-bitrate transcoding behind an end-to-end typed tRPC API over PostgreSQL, with threaded comments fetched via recursive CTEs.",
     category: "Full-stack",
     status: "wip", // TODO: set "live" + add demo URL if deployed
-    year: "2024",
-    // TODO: confirm this description + tags + year match your actual my-tube repo
-    tags: ["TypeScript", "Next.js", "PostgreSQL"], // TODO: replace with your real stack
+    year: "2025",
+    tags: ["React", "TypeScript", "Next.js", "tRPC", "PostgreSQL", "Mux"],
     github: "https://github.com/Winger47/my-tube",
     imageUrl: null, // TODO: add /public/images/projects/mytube.jpg
     details: { ...TODO_DETAILS },
@@ -141,26 +140,26 @@ export type Engagement = {
 
 export const experience = {
   company: "Infosys",
-  title: "Specialist Programmer",
+  title: "Specialist Programmer (Power Programmer)",
   period: "Jul 2024 – Apr 2026",
   location: "Pune",
   engagements: [
     {
-      client: "Banking client",
-      stack: [".NET", ".NET Core"],
+      client: "E-commerce engagement — order-processing path",
+      stack: ["Python", "RabbitMQ", "Prometheus"],
       points: [
-        "TODO: what you built / owned for the banking client on .NET / .NET Core.",
-        "TODO: impact metric — do not invent a number.",
+        "Owned the order-processing path end to end, migrating it from synchronous in-process handoffs to an at-least-once RabbitMQ pipeline — idempotency-key dedup for safe retries, dead-letter queue for poison messages.",
+        "Diagnosed burst-traffic queueing to async connection-pool saturation via Prometheus histograms; right-sized pool limits and timeouts to clear head-of-line blocking without adding replicas.",
+        "TODO: add an impact metric if you have one — do not invent a number.",
       ],
     },
     {
-      client: "E-commerce client",
-      stack: ["Python", "FastAPI", "gRPC", "RabbitMQ", "Redis", "GCP"],
+      client: "Banking engagement — read path & service boundaries",
+      stack: ["Python", "Redis", "gRPC/Protobuf"],
       points: [
-        "Led migration of internal APIs to gRPC for lower-latency service-to-service calls.",
-        "Designed event-driven flows on RabbitMQ + Redis, decoupling request paths from background processing.",
-        "Drove GCP profiling, CI/CD, and observability improvements to surface and fix production bottlenecks.",
-        "TODO: impact metric — do not invent a number.",
+        "Owned the read path of a high-traffic transactional API, cutting database load with a Redis read-through cache — tenant-scoped keys and per-endpoint TTLs bounding staleness without write-path invalidation.",
+        "Hardened service boundaries by migrating inter-service REST/JSON to gRPC/Protobuf, moving contract breakage from runtime to build time via generated stubs and CI schema checks.",
+        "TODO: add an impact metric if you have one — do not invent a number.",
       ],
     },
   ] as Engagement[],
@@ -170,68 +169,19 @@ export const experience = {
 export const expStats = [
   { value: "Expert", label: "Codeforces rank" },
   { value: "TODO", label: "Projects shipped" }, // TODO: real count
-  { value: "TODO", label: "Years experience" }, // TODO: real figure
-];
-
-// ── Stack (tabs must match these group names) ────────────────────────────────
-export const stackTabs = ["Languages", "Backend", "AI-ML", "Databases", "DevOps"] as const;
-
-export const skills: { group: (typeof stackTabs)[number]; items: string[] }[] = [
-  { group: "Languages", items: ["Python", "C++", "C#", "SQL"] },
-  {
-    group: "Backend",
-    items: [
-      "FastAPI",
-      "Django",
-      ".NET Core",
-      "gRPC",
-      "REST",
-      "WebSocket",
-      "SQLAlchemy",
-      "RabbitMQ",
-      "Celery",
-      "Async I/O",
-      "Event-Driven Architecture",
-      "System Design",
-      "Microservices",
-      "Clean / Hexagonal Architecture",
-    ],
-  },
-  {
-    group: "AI-ML",
-    items: [
-      "RAG",
-      "LangChain",
-      "LangGraph",
-      "Multi-Agent Systems",
-      "Vector Databases",
-      "Embeddings",
-      "Cross-Encoder Re-ranking",
-      "RAG Evaluation",
-      "PyTorch",
-      "Transformers",
-    ],
-  },
-  {
-    group: "Databases",
-    items: ["PostgreSQL", "Redis", "ChromaDB", "Postgres RLS"],
-  },
-  {
-    group: "DevOps",
-    items: ["Docker", "GCP", "CI/CD", "Git", "OpenTelemetry", "Observability", "Load Testing (Locust)"],
-  },
+  { value: "~2", label: "Years experience" }, // from résumé: ~2 years
 ];
 
 // ── Competitive programming (surfaced in the activity section) ───────────────
 export const competitive = [
   {
     platform: "LeetCode",
-    detail: "Guardian · Peak 2212 · Top 1% globally · 1500+ solved",
+    detail: "Guardian · Peak 2250 · Top 1% · Rank 207/21,482 (Weekly)",
     href: "https://leetcode.com/u/rs_cris/",
   },
   {
     platform: "Codeforces",
-    detail: "Expert · Peak 1430",
+    detail: "Expert · Peak 1633",
     href: "https://codeforces.com/profile/rs27_cris",
   },
 ];

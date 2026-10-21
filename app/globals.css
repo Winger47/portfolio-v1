@@ -4,41 +4,82 @@
 
 /* ──────────────────────────────────────────────────────────────────────────
    Design tokens — single source of truth for the palette. Colors are stored as
-   space-separated RGB triplets so Tailwind can apply `/opacity` modifiers
-   (see tailwind.config.ts). Light is the default; dark follows the OS until the
-   viewer explicitly picks a theme via [data-theme] (toggle + ⌘K, Step 7).
+   space-separated RGB triplets so Tailwind can apply `/opacity` modifiers.
+   Light is the default; dark follows the OS until the viewer picks a theme via
+   [data-theme] (toggle + ⌘K).
    ────────────────────────────────────────────────────────────────────────── */
 :root {
-  --bg: 252 252 251; /* #FCFCFB */
-  --fg: 24 24 27; /* #18181B */
-  --muted: 113 113 122; /* #71717A */
-  --border: 228 228 231; /* #E4E4E7 */
+  --bg: 247 246 243; /* #F7F6F3 */
   --card: 255 255 255; /* #FFFFFF */
-  --accent: 249 214 155; /* #F9D69B */
-  --accent-ink: 138 90 0; /* #8A5A00 — readable warm on light */
+  --fg: 28 25 23; /* #1C1917 */
+  --muted: 95 91 85; /* #5F5B55 */
+  --border: 227 224 218; /* #E3E0DA */
+  --border-strong: 207 203 195; /* #CFCBC3 */
+  --accent: 245 199 126; /* #F5C77E */
+  --accent-soft: 251 235 208; /* #FBEBD0 */
+  --accent-ink: 138 90 0; /* #8A5A00 */
+  --success: 21 128 61; /* #15803D */
+  --success-soft: 220 252 231; /* #DCFCE7 */
+  --warning: 180 83 9; /* #B45309 */
+  --warning-soft: 254 243 199; /* #FEF3C7 */
+  --grid: 0.05;
+  --card-shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 4px 12px -4px rgba(28, 25, 23, 0.08);
+  /* GitHub contribution scale (light): empty → 4 amber steps to #B45309 */
+  --gh-0: #edebe6;
+  --gh-1: #f5d9a8;
+  --gh-2: #ecbb6b;
+  --gh-3: #d98a2b;
+  --gh-4: #b45309;
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
   --bg: 12 12 13; /* #0C0C0D */
+  --card: 20 20 22; /* #141416 */
   --fg: 237 237 237; /* #EDEDED */
   --muted: 161 161 170; /* #A1A1AA */
   --border: 39 39 42; /* #27272A */
-  --card: 20 20 22; /* #141416 */
-  --accent: 249 214 155; /* #F9D69B */
-  --accent-ink: 249 214 155; /* pale warm is readable on dark */
+  --border-strong: 63 63 70; /* #3F3F46 */
+  --accent: 245 199 126; /* same family */
+  --accent-soft: 45 38 24; /* dark warm tint */
+  --accent-ink: 245 199 126; /* pale warm reads on dark */
+  --success: 34 197 94; /* #22C55E */
+  --success-soft: 20 40 28;
+  --warning: 245 158 11; /* #F59E0B */
+  --warning-soft: 45 34 12;
+  --grid: 0.04;
+  --card-shadow: none;
+  /* GitHub contribution scale (dark): separate ramp */
+  --gh-0: #1a1a1d;
+  --gh-1: #4a3a1e;
+  --gh-2: #7a5a1e;
+  --gh-3: #b4860f;
+  --gh-4: #f59e0b;
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: 12 12 13;
+    --card: 20 20 22;
     --fg: 237 237 237;
     --muted: 161 161 170;
     --border: 39 39 42;
-    --card: 20 20 22;
-    --accent: 249 214 155;
-    --accent-ink: 249 214 155;
+    --border-strong: 63 63 70;
+    --accent: 245 199 126;
+    --accent-soft: 45 38 24;
+    --accent-ink: 245 199 126;
+    --success: 34 197 94;
+    --success-soft: 20 40 28;
+    --warning: 245 158 11;
+    --warning-soft: 45 34 12;
+    --grid: 0.04;
+    --card-shadow: none;
+    --gh-0: #1a1a1d;
+    --gh-1: #4a3a1e;
+    --gh-2: #7a5a1e;
+    --gh-3: #b4860f;
+    --gh-4: #f59e0b;
     color-scheme: dark;
   }
 }
@@ -51,16 +92,16 @@
     @apply bg-bg text-fg font-sans antialiased;
     font-size: 14px;
     line-height: 1.7;
-    /* very faint dotted grid (~3.5% opacity) */
+    /* faint dotted grid (~5% light / ~4% dark) */
     background-image: radial-gradient(
       circle at center,
-      rgb(var(--fg) / 0.035) 1px,
+      rgb(var(--fg) / var(--grid)) 1px,
       transparent 1.4px
     );
     background-size: 22px 22px;
   }
   ::selection {
-    background: rgb(var(--accent) / 0.5);
+    background: rgb(var(--accent-soft));
     color: rgb(var(--fg));
   }
   :focus-visible {
@@ -84,10 +125,17 @@
     @apply border-t border-dashed border-line;
   }
   .card {
-    @apply rounded-md border border-line bg-card transition-all duration-200;
+    @apply rounded-md border border-line bg-card;
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+  .card-hover:hover {
+    border-color: rgb(var(--border-strong));
+    transform: translateY(-2px);
   }
   .tag {
-    @apply inline-block font-mono rounded-[4px] border border-line px-1.5 py-0.5 text-muted;
+    @apply inline-block rounded-[4px] border border-line bg-card font-mono text-fg;
+    padding: 2px 6px;
     font-size: 11px;
   }
   .pill {
@@ -95,9 +143,17 @@
     font-size: 11px;
     letter-spacing: 0.04em;
   }
+  /* inline content link: fg text with an accent underline */
+  .link {
+    @apply text-fg;
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--accent));
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
 }
 
-/* scanline texture laid over project images */
+/* scanline / grain texture laid over project images */
 .scanlines {
   background-image: repeating-linear-gradient(
     0deg,
@@ -161,6 +217,11 @@ details[data-card][open] > summary .chev {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .card,
+  .card-hover:hover {
+    transition: none;
+    transform: none;
   }
   .dot-pulse {
     animation: none;

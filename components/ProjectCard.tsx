@@ -34,7 +34,7 @@ function IconLink({
 export default function ProjectCard({ p }: { p: Project }) {
   const live = p.status === "live";
   return (
-    <article className="card group flex flex-col overflow-hidden transition-all hover:-translate-y-0.5 hover:border-fg/40">
+    <article className="card card-hover group flex flex-col overflow-hidden">
       {/* preview image (16:9) with the HTTP-response overlay */}
       <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-line bg-card">
         {p.imageUrl ? (
@@ -53,19 +53,17 @@ export default function ProjectCard({ p }: { p: Project }) {
         )}
         <div className="scanlines pointer-events-none absolute inset-0 opacity-40" aria-hidden />
         {/* top-left: status pill */}
-        <span className="pill absolute left-2 top-2 bg-bg/80 text-fg backdrop-blur">
-          {live ? (
-            <>
-              <span className="size-1.5 rounded-full bg-[#1F9D74] dot-pulse" aria-hidden />
-              LIVE
-            </>
-          ) : (
-            <>
-              <span className="size-1.5 rounded-full bg-accent" aria-hidden />
-              IN PROGRESS
-            </>
-          )}
-        </span>
+        {live ? (
+          <span className="pill absolute left-2 top-2 border-success/30 bg-successSoft text-success backdrop-blur">
+            <span className="size-1.5 rounded-full bg-success dot-pulse" aria-hidden />
+            LIVE
+          </span>
+        ) : (
+          <span className="pill absolute left-2 top-2 border-warning/30 bg-warningSoft text-warning backdrop-blur">
+            <span className="size-1.5 rounded-full bg-warning" aria-hidden />
+            IN PROGRESS
+          </span>
+        )}
         {/* top-right: trace line */}
         <span className="pill absolute right-2 top-2 bg-bg/80 text-fg backdrop-blur">
           {traceLine(p)}

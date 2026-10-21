@@ -29,13 +29,29 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Shikhar Pandav — Backend & GenAI Engineer",
   description:
-    "Backend engineer building production GenAI systems — RAG pipelines, multi-agent LLM orchestration, and the distributed infrastructure behind them. Python, FastAPI, LangChain, vector databases.",
+    "Backend engineer (Delhi NCR) building distributed Python services and applied GenAI — FastAPI, gRPC, RabbitMQ, Redis, and a self-hosted LLM gateway.",
   openGraph: {
     title: "Shikhar Pandav — Backend & GenAI Engineer",
     description:
-      "Backend engineer building production GenAI systems — RAG, multi-agent LLM orchestration, and distributed infrastructure.",
+      "Backend engineer (Delhi NCR) building distributed Python services and applied GenAI.",
     type: "website",
   },
+};
+
+// JSON-LD person schema — location is Delhi NCR (single source: this value).
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Shikhar Pandav",
+  jobTitle: "Backend & GenAI Engineer",
+  address: { "@type": "PostalAddress", addressRegion: "Delhi NCR", addressCountry: "IN" },
+  url: "https://github.com/Winger47",
+  sameAs: [
+    "https://github.com/Winger47",
+    "https://www.linkedin.com/in/shikhar-pandav-32a90624b/",
+    "https://codeforces.com/profile/rs27_cris",
+    "https://leetcode.com/u/rs_cris/",
+  ],
 };
 
 export default function RootLayout({
@@ -55,6 +71,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
           }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
       <body>{children}</body>

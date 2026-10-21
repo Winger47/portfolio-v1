@@ -5,8 +5,7 @@ import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
 import Stack from "@/components/Stack";
 import Activity from "@/components/Activity";
-import SectionHeader from "@/components/SectionHeader";
-import { about, profile } from "@/content";
+import { profile } from "@/content";
 
 export default function Home() {
   return (
@@ -16,23 +15,6 @@ export default function Home() {
         <section className="section pb-0 pt-6">
           <Hero />
         </section>
-
-        <Reveal>
-          <section id="about" className="section sep">
-            <SectionHeader label="01 — ABOUT" title="About" />
-            <ul className="space-y-3">
-              {about.map((para, i) => (
-                <li key={i} className="flex gap-3 text-muted">
-                  <span
-                    aria-hidden
-                    className="mt-[11px] size-1 shrink-0 rounded-full bg-accentInk"
-                  />
-                  <span>{para}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        </Reveal>
 
         <Reveal>
           <section id="projects" className="section sep">

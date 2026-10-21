@@ -21,7 +21,7 @@ export default function Activity() {
             href={c.href}
             target="_blank"
             rel="noreferrer"
-            className="card flex items-center justify-between gap-3 p-4 transition-colors hover:border-fg/40"
+            className="card card-hover flex items-center justify-between gap-3 p-4"
           >
             <span className="font-display text-lg leading-none">{c.platform}</span>
             <span className="text-right font-mono text-[11px] text-muted">{c.detail}</span>
