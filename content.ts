@@ -20,6 +20,7 @@ export const profile = {
   avatarUrl: null as string | null, // TODO: add /public/images/avatar.jpg → set "/images/avatar.jpg"
 
   resumeUrl: "/Shikhar_Pandav_Resume.pdf?v=2026-10-21",
+  calUrl: null as string | null, // TODO: set a Cal.com URL to show the "Book a call" card
   links: {
     github: "https://github.com/Winger47",
     linkedin: "https://www.linkedin.com/in/shikhar-pandav-32a90624b/",
@@ -187,46 +188,68 @@ export const competitive = [
 ];
 
 // ── Pages / navigation (single source for tiles, navbar, breadcrumbs, ⌘K) ────
-export type PageKey = "projects" | "dsa" | "experience" | "skills" | "activity";
+export type PageKey = "projects" | "dsa" | "experience" | "skills" | "activity" | "connect";
 
 export const pages: Record<
   PageKey,
-  { href: string; mono: string; title: string; desc: string }
+  { href: string; mono: string; title: string; desc: string; hue: string }
 > = {
   projects: {
     href: "/projects",
     mono: "02 — PROJECTS",
     title: "Projects",
     desc: "Production backend and applied-GenAI systems, with the engineering details behind each.",
+    hue: "var(--hue-projects)",
   },
   dsa: {
     href: "/dsa",
     mono: "03 — DSA",
     title: "DSA & Algorithms",
     desc: "Competitive programming — Codeforces Expert, with live rating and history.",
+    hue: "var(--hue-dsa)",
   },
   experience: {
     href: "/experience",
     mono: "04 — EXPERIENCE",
     title: "Experience",
     desc: "~2 years at Infosys across banking and e-commerce engagements.",
+    hue: "var(--hue-experience)",
   },
   skills: {
     href: "/skills",
     mono: "05 — SKILLS",
     title: "Skills",
     desc: "The full stack I work with, grouped the way my résumé groups it.",
+    hue: "var(--hue-skills)",
   },
   activity: {
     href: "/activity",
     mono: "06 — ACTIVITY",
     title: "Activity",
     desc: "GitHub contributions and competitive-programming profiles.",
+    hue: "var(--hue-activity)",
+  },
+  connect: {
+    href: "/connect",
+    mono: "07 — CONNECT",
+    title: "Connect",
+    desc: "The fastest ways to reach me — email, socials, and my résumé.",
+    hue: "var(--hue-connect)",
   },
 };
 
+// "Now" has a tile but no page of its own.
+export const nowHue = "var(--hue-now)";
+
 // Order of the primary links shown in the navbar.
-export const navOrder: PageKey[] = ["projects", "experience", "skills", "dsa"];
+export const navOrder: PageKey[] = ["projects", "experience", "skills", "dsa", "connect"];
+
+// "Now" snapshot for the homepage tile. Keep it honest — TODO where unknown.
+export const now = {
+  building: "FORGE",
+  learning: "TODO: what you're learning",
+  reading: "TODO: what you're reading",
+};
 
 // DSA topics — TODO placeholders; fill these in yourself.
 export const dsaTopics: string[] = [

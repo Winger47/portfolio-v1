@@ -24,7 +24,9 @@ export default function PageShell({
 
       {/* heading */}
       <div className="mt-5">
-        <div className="meta">{p.mono}</div>
+        <div className="meta" style={{ color: p.hue }}>
+          {p.mono}
+        </div>
         <h1 className="mt-1.5 font-display text-3xl leading-tight sm:text-4xl">{p.title}</h1>
         <p className="mt-2 max-w-[60ch] text-muted">{p.desc}</p>
       </div>

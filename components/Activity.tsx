@@ -1,11 +1,27 @@
-import { competitive } from "@/content";
+import { competitive, profile } from "@/content";
 import ContributionGraph from "./ContributionGraph";
+import type { LastPush } from "@/data/github";
 
-export default function Activity() {
+export default function Activity({ lastPush }: { lastPush?: LastPush }) {
   return (
     <>
       <div className="card overflow-x-auto p-4">
-        <div className="meta mb-3">@Winger47</div>
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <a
+            href={profile.links.github}
+            target="_blank"
+            rel="noreferrer"
+            className="meta normal-case text-muted transition-colors hover:text-fg"
+            style={{ letterSpacing: 0 }}
+          >
+            @Winger47 ↗
+          </a>
+          {lastPush && (
+            <span className="font-mono text-[11px] text-muted">
+              last push: {lastPush.ago} → {lastPush.repo}
+            </span>
+          )}
+        </div>
         <div className="min-w-[640px]">
           <ContributionGraph username="Winger47" />
         </div>

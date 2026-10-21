@@ -5,7 +5,7 @@ import { getTheme, toggleTheme, type Theme } from "@/lib/theme";
 import { SunIcon, MoonIcon } from "./icons";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     setTheme(getTheme());

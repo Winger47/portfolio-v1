@@ -51,7 +51,9 @@ export default function Dsa({ cf }: { cf: CfData }) {
         {cf.history.length >= 2 && (
           <div className="mt-6">
             <div className="meta mb-2">Rating history</div>
-            <Sparkline points={cf.history.map((h) => h.r)} />
+            <div style={{ color: "var(--hue-dsa)" }}>
+              <Sparkline points={cf.history.map((h) => h.r)} draw width={360} height={60} />
+            </div>
           </div>
         )}
 

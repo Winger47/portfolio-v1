@@ -13,6 +13,7 @@ const NAV: { key: "home" | PageKey; label: string; href: string }[] = [
   { key: "skills", label: pages.skills.title, href: pages.skills.href },
   { key: "dsa", label: pages.dsa.title, href: pages.dsa.href },
   { key: "activity", label: pages.activity.title, href: pages.activity.href },
+  { key: "connect", label: pages.connect.title, href: pages.connect.href },
 ];
 
 export default function CommandPalette() {

@@ -4,11 +4,13 @@ export default function Sparkline({
   width = 200,
   height = 44,
   label = "Rating history",
+  draw = false,
 }: {
   points: number[];
   width?: number;
   height?: number;
   label?: string;
+  draw?: boolean;
 }) {
   if (points.length < 2) return null;
 
@@ -39,13 +41,15 @@ export default function Sparkline({
     >
       <path
         d={d}
+        pathLength={1}
+        className={draw ? "spark-draw" : undefined}
         fill="none"
-        stroke="rgb(var(--accent-ink))"
+        stroke="currentColor"
         strokeWidth={1.5}
         strokeLinejoin="round"
         strokeLinecap="round"
       />
-      <circle cx={last[0]} cy={last[1]} r={2.5} fill="rgb(var(--accent-ink))" />
+      <circle cx={last[0]} cy={last[1]} r={2.5} fill="currentColor" />
     </svg>
   );
 }

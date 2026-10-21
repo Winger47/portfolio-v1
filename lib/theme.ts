@@ -3,8 +3,8 @@
 export type Theme = "light" | "dark";
 
 export function getTheme(): Theme {
-  if (typeof document === "undefined") return "light";
-  return (document.documentElement.getAttribute("data-theme") as Theme) || "light";
+  if (typeof document === "undefined") return "dark";
+  return (document.documentElement.getAttribute("data-theme") as Theme) || "dark";
 }
 
 export function applyTheme(t: Theme) {

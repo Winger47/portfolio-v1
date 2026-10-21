@@ -10,6 +10,7 @@ import { profile, pages, navOrder } from "@/content";
 // Global overlays, lazy-loaded (kept out of the initial bundle).
 const CommandPalette = dynamic(() => import("./CommandPalette"), { ssr: false });
 const SkillsDialog = dynamic(() => import("./SkillsDialog"), { ssr: false });
+const Terminal = dynamic(() => import("./Terminal"), { ssr: false });
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -36,10 +37,9 @@ export default function Navbar() {
                 href={l.href}
                 aria-current={active(l.href) ? "page" : undefined}
                 className={`meta border-b-2 pb-0.5 transition-colors ${
-                  active(l.href)
-                    ? "border-accentInk text-fg"
-                    : "border-transparent text-muted hover:text-fg"
+                  active(l.href) ? "text-fg" : "border-transparent text-muted hover:text-fg"
                 }`}
+                style={active(l.href) ? { borderBottomColor: l.hue } : undefined}
               >
                 {l.title}
               </Link>
@@ -92,6 +92,7 @@ export default function Navbar() {
 
       <CommandPalette />
       <SkillsDialog />
+      <Terminal />
     </>
   );
 }
