@@ -47,7 +47,7 @@ export const experience = [
   {
     company: "Infosys",
     role: "Software Engineer",
-    period: "Aug 2024 - Apr 2026",
+    period: "Jul 2024 – Apr 2026",
     kind: "Full-time",
     points: [
       "Built Python/FastAPI backend services for a banking client; led migration of internal APIs to gRPC for lower-latency service-to-service calls.",
@@ -163,7 +163,7 @@ export const competitive = [
   },
   {
     platform: "Codeforces",
-    detail: "Specialist · Peak 1430",
+    detail: "Expert · Peak 1430",
     href: "https://codeforces.com/profile/rs27_cris",
   },
 ];
